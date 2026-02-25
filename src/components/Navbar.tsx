@@ -1,6 +1,9 @@
-import { motion } from 'framer-motion';
+import { useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 export const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
   const navLinks = [
     { name: 'Главная', href: '#home' },
     { name: 'Портфолио', href: '#portfolio' },
@@ -8,41 +11,85 @@ export const Navbar = () => {
     { name: 'Контакты', href: '#contacts' },
   ];
 
+  const toggleMenu = () => setIsOpen(!isOpen);
+
   return (
-    <motion.nav 
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.8 }}
-      className="fixed top-0 left-0 z-50 w-full border-b border-white/5 bg-zinc-950/50 backdrop-blur-md"
-    >
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
-        {/* Логотип — теперь он главный акцент слева */}
-        <a href="#home" className="text-xl font-light tracking-[0.3em] text-white hover:opacity-70 transition-opacity">
-          SOPHIA<span className="font-serif italic text-zinc-500">L.</span>
-        </a>
+    <>
+      <motion.nav 
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className="fixed top-0 left-0 z-[60] w-full border-b border-white/5 bg-zinc-950/50 backdrop-blur-md"
+      >
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5">
+          <a href="#home" className="text-xl font-light tracking-[0.3em] text-white">
+            SOPHIA<span className="font-serif italic text-zinc-500">L.</span>
+          </a>
 
-        {/* Меню — по центру или справа */}
-        <div className="hidden space-x-12 md:flex">
-          {navLinks.map((link) => (
-            <a
-              key={link.name}
-              href={link.href}
-              className="text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-400 transition-colors hover:text-white"
-            >
-              {link.name}
-            </a>
-          ))}
-        </div>
+          {/* Десктопное меню */}
+          <div className="hidden space-x-12 md:flex">
+            {navLinks.map((link) => (
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-[10px] font-medium uppercase tracking-[0.2em] text-zinc-400 transition-colors hover:text-white"
+              >
+                {link.name}
+              </a>
+            ))}
+          </div>
 
-        {/* Мобильное меню (иконка) — оставляем для адаптивности */}
-        <div className="block md:hidden text-white">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
+          {/* Кнопка Бургера */}
+          <button 
+            onClick={toggleMenu}
+            className="relative z-[70] block md:hidden text-white outline-none"
+            aria-label="Toggle menu"
+          >
+            <div className="flex flex-col gap-1.5 w-6">
+              <motion.span 
+                animate={isOpen ? { rotate: 45, y: 7 } : { rotate: 0, y: 0 }}
+                className="h-px w-full bg-white block" 
+              />
+              <motion.span 
+                animate={isOpen ? { opacity: 0 } : { opacity: 1 }}
+                className="h-px w-full bg-white block" 
+              />
+              <motion.span 
+                animate={isOpen ? { rotate: -45, y: -7 } : { rotate: 0, y: 0 }}
+                className="h-px w-full bg-white block" 
+              />
+            </div>
+          </button>
         </div>
-      </div>
-    </motion.nav>
+      </motion.nav>
+
+      {/* Мобильное полноэкранное меню */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, x: '100%' }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: '100%' }}
+            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
+            className="fixed inset-0 z-[50] flex flex-col items-center justify-center bg-zinc-950 md:hidden"
+          >
+            <div className="flex flex-col items-center space-y-8">
+              {navLinks.map((link, i) => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.1 }}
+                  onClick={() => setIsOpen(false)}
+                  className="text-2xl font-light uppercase tracking-[0.3em] text-white hover:italic transition-all"
+                >
+                  {link.name}
+                </motion.a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
   );
 };
