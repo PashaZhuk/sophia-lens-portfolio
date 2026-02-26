@@ -1,73 +1,38 @@
-# React + TypeScript + Vite
+# Sophia L. | Premium Photography Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Стильный, быстрый и адаптивный лендинг для профессионального фотографа. Проект сочетает в себе эстетику минимализма и современный технологический стек.
 
-Currently, two official plugins are available:
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
+![Tailwind](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
+![Supabase](https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🌟 Особенности
 
-## React Compiler
+- **Премиальный дизайн**: Темная тема, продуманная типографика и акцент на визуальном контенте.
+- **Интерактивная галерея**: Адаптивная сетка (Masonry Grid) с поддержкой **Lightbox** для просмотра фото во весь экран.
+- **Fullstack функционал**: Форма обратной связи полностью интегрирована с **Supabase**. Заявки сохраняются в базе данных в реальном времени.
+- **Производительность**: Сборка на Vite обеспечивает мгновенную загрузку.
+- **Мобильная адаптивность**: Полностью переработанное мобильное меню с плавной навигацией без смещения макета.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🛠 Технологический стек
 
-## Expanding the ESLint configuration
+- **Frontend**: React 18, TypeScript, Tailwind CSS v4.
+- **Animations**: Framer Motion (плавные переходы, интерактивный бургер).
+- **Backend**: Supabase (Database & Auth).
+- **Deployment**: Vercel.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🚀 Быстрый старт
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+1. **Клонируйте репозиторий:**
+   git clone https://github.com/PashaZhuk/sophia-lens-portfolio.git
+2. **Установите зависимости**
+   npm install
+3. **Настройте переменные окружения:**
+   Создайте файл .env в корне проекта и добавьте свои ключи Supabase:
+   VITE_SUPABASE_URL=ваш_url
+   VITE_SUPABASE_ANON_KEY=ваш_ключ
+4. **Запустите проект** 
+   npm run dev
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Разработано для портфолио. Готов к коммерческому использованию.
